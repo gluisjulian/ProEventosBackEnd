@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProEventos.API.Data;
+using ProEventos.Domain;
+using ProEventos.Persistence.Data;
+
 
 namespace ProEventos.API.Controllers
 {
@@ -7,9 +9,9 @@ namespace ProEventos.API.Controllers
     [Route("api/[controller]")]
     public class EventosController : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly ProEventosContext _context;
 
-        public EventosController(DataContext context)
+        public EventosController(ProEventosContext context)
         {
             _context = context;
         }
@@ -26,7 +28,7 @@ namespace ProEventos.API.Controllers
         [HttpGet("{id}")]
         public IEnumerable<Evento> GetAll(int id)
         {
-            return _context.Eventos.Where(x => x.EventoId == id);
+            return _context.Eventos.Where(x => x.Id == id);
         }
 
         [HttpPost]
