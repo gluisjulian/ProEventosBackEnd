@@ -22,7 +22,7 @@ namespace ProEventos.Application.Interfaces.Implementations
                 _geralRepository.Add<Evento>(model);
                 if (await _geralRepository.SaveChangesAsync())
                 {
-                    return await _eventoRepository.GetAllEventoByIdAsync(model.Id, false);
+                    return await _eventoRepository.GetEventoByIdAsync(model.Id, false);
                 }
 
                 return null;
@@ -36,7 +36,7 @@ namespace ProEventos.Application.Interfaces.Implementations
         {
             try
             {
-                var evento = await _eventoRepository.GetAllEventoByIdAsync(eventoId, false);
+                var evento = await _eventoRepository.GetEventoByIdAsync(eventoId, false);
                 if(evento == null)
                     return null;
 
@@ -45,7 +45,7 @@ namespace ProEventos.Application.Interfaces.Implementations
                 _geralRepository.Update<Evento>(model);
                 if (await _geralRepository.SaveChangesAsync())
                 {
-                    return await _eventoRepository.GetAllEventoByIdAsync(model.Id, false);
+                    return await _eventoRepository.GetEventoByIdAsync(model.Id, false);
                 }
 
                 return null;
@@ -61,7 +61,7 @@ namespace ProEventos.Application.Interfaces.Implementations
         {
             try
             {
-                var evento = await _eventoRepository.GetAllEventoByIdAsync(eventoId, false);
+                var evento = await _eventoRepository.GetEventoByIdAsync(eventoId, false);
                 if (evento == null) throw new Exception("Evento para DELETE não foi encontrado!");
 
                 _geralRepository.Delete<Evento>(evento);
@@ -112,7 +112,7 @@ namespace ProEventos.Application.Interfaces.Implementations
         {
             try
             {
-                var evento = await _eventoRepository.GetAllEventoByIdAsync(eventoId, includePalestrantes);
+                var evento = await _eventoRepository.GetEventoByIdAsync(eventoId, includePalestrantes);
                 if (evento == null) return null;
 
                 return evento;
